@@ -43,7 +43,7 @@ h2, p{text-align: center; font-family: 'Montserrat', sans-serif;}
 
 /*Style véhicule occasion */
 
-.main_occasion{display: flex;}
+.main_occasion{display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;}
 
 .display_card{display: flex;flex-direction: column;width: 400px;}
 
@@ -53,3 +53,8 @@ h2, p{text-align: center; font-family: 'Montserrat', sans-serif;}
  
 .button_card{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 5px;transform:scale(1.5);transition:0.2s linear;}
 
+/*Style Nous contacter*/
+
+fieldset{display: flex;flex-direction: column;justify-content: center;}
+
+.display_card{margin: 15px;}

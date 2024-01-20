@@ -19,7 +19,7 @@
   <ul class="navbar">
     <li><a href="index.php">Accueil</a></li>
     <li><a href="news.asp">Nos services</a></li>
-    <li><a href="contact.asp">Nous contacter</a></li>
+    <li><a href="form.php">Nous contacter</a></li>
     <li><a href="occasion.php">Nos occasions</a></li>
     <li><a href="about.asp">Admin</a></li>
   </ul>
