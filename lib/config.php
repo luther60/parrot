@@ -1,7 +1,7 @@
 <?php
 
 /*Fonction qui recupere un article via son id => on passe en paramètre le PDO et l'id */
-function getVehicleById(PDO $pdo, int $id):array
+function getVehicleById(PDO $pdo, int $id):array|bool
 {
 /*Requete récuperant l'id via une variable intermédiaire transmise ds le bindvalue*/  
 $sql = 'SELECT * FROM vehicle WHERE id = :id';
@@ -12,6 +12,7 @@ $vehicle = $query->fetch(PDO::FETCH_ASSOC);//FETCH CAR ON SOUHAITE RECUPERER UN 
 return $vehicle;
 };
 
+//On recupere toutes la table vehicle
 function getVehicles(PDO $pdo) {
  $sql = 'SELECT * FROM vehicle';
  $query = $pdo->prepare($sql);
@@ -19,3 +20,8 @@ function getVehicles(PDO $pdo) {
  $vehicles = $query->fetchAll(PDO::FETCH_ASSOC);
  return $vehicles;
 }
+
+//Fonction permettant la gestion d'image par defaut ou trouvée
+
+
+
