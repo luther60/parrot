@@ -21,7 +21,7 @@
     <li><a href="news.asp">Nos services</a></li>
     <li><a href="form.php">Nous contacter</a></li>
     <li><a href="occasions.php">Nos occasions</a></li>
-    <li><a href="about.asp">Admin</a></li>
+    <li><a href="login.php">Admin</a></li>
   </ul>
 </nav> 
 </header>

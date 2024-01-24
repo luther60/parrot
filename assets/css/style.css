@@ -64,3 +64,27 @@ section{display: flex;align-items: center;background-color: #cdc5a3;}
 fieldset{display: flex;flex-direction: column;justify-content: center;}
 
 .display_card{margin: 15px;}
+
+/*Style login*/
+
+form{display: flex;flex-direction: column;align-items: center;background-color: #a59a6f;}
+
+label{font-family: 'Montserrat', sans-serif;font-weight: bold;text-align: center;padding-bottom: 5px;}
+
+.champs{display: flex;flex-direction: column;}
+
+input{height: 50px;width: 300px;margin: 20px;border-radius: 10px;font-size: 1.5em;}
+
+.log, .submit{background-color: #cdc5a3;}
+
+.submit:hover{background-color: #a59a6f;}
+
+.alert{
+   font-family: 'Montserrat', sans-serif;
+   font-weight: bold;
+   background-color: firebrick;
+   height: 50px;
+   display: flex;
+   justify-content: center; 
+   align-items: center;
+}
