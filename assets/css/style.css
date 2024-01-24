@@ -14,7 +14,13 @@ ul{list-style-type: none;}
 
 a{color: black; font-weight: bold;font-size: 2em;font-family: 'Montserrat', sans-serif;text-decoration: none; }
 
-a:hover{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 5px;transform:scale(1.5);transition:0.2s linear;}
+a:hover{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 5px;}
+
+.power{height: 40px;width: 40px;position: relative;}
+
+.power:hover{background-color: #a59a6f;border-radius: 10px;}
+
+
 
 /*Style main*/
 

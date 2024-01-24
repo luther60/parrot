@@ -1,8 +1,14 @@
  <?php
  
 require_once __DIR__."/../lib/session.php";
-
-
+/*Si pas de session existante ou pas le bon role (regenerate_id evite de réutiliser la page admin en cours de session sur autre
+ navigateur que l'actuel, il est possible de limiter le temps de session via le cookie)*/
+if(!isset($_SESSION['user'])) {
+   header("location: /../../index.php");//redirection
+};
+if(isset($_SESSION['user']['role']) != 'admin') {
+  header("location: /login.php");//redirection
+};
  ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,6 +30,9 @@ require_once __DIR__."/../lib/session.php";
     <li><a href="form.php">Nous contacter</a></li>
     <li><a href="/occasions.php">Nos occasions</a></li>
     <li><a href="/login.php">Admin</a></li>
+    <!--Deconnexion -->
+   <a class="power" href="/../index.php"><img class="power" src="/assets/images/power-off-solid.svg"/></a>
+    
   </ul>
 </nav> 
 </header>

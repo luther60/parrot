@@ -12,6 +12,7 @@
    $user = verifyUser($pdo,$email,$password);
   if ($user) {
     session_regenerate_id(true);//Fonction qui régenère l'id de session
+    //On vérifie si l'utilisateur est admin ou user puis on le redirige en consequence
     $_SESSION["user"] = $user;
     if ($user['role'] === "user") {
       header("location: /index.php");
