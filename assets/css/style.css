@@ -94,3 +94,15 @@ input{height: 50px;width: 300px;margin: 20px;border-radius: 10px;font-size: 1.5e
    justify-content: center; 
    align-items: center;
 }
+
+/*Style vehicle*/
+
+table {display: flex;flex-direction: column; justify-content: center; border: 1px solid #333; margin: 100px; }
+
+thead,tfoot { background-color: #a59a6f; color:black;}
+
+tr, td{display: flex;flex-direction: row; justify-content: center; border: 1px solid #333;}
+
+th, td{width: 570px;height: 35PX;align-items: center;font-weight: bold;font-size: 1.2em;background-color: #cdc5a3;}
+
+.crud:hover{color: red}
