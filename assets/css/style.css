@@ -26,9 +26,9 @@ a:hover{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 
 
 main{margin: 50px;}
 
-section{display: flex;flex-direction: column;}
+section{display: flex;flex-direction: column;margin: 10px;border-radius: 5px;}
 
-img{border-radius: 15px 0px 0px 15px;width: 400px;height: 300px;}
+img{border-radius: 15px 0px 0px 15px;height: 300px;}
 
 h1{text-align: center;font-size: 2.5em;font-family: 'Montserrat', sans-serif;}
 
@@ -51,11 +51,11 @@ h2, p{text-align: center; font-family: 'Montserrat', sans-serif;}
 
 .main_occasions{display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;}
 
-.display_card{display: flex;flex-direction: column;width: 400px;}
+.display_card{display: flex;flex-direction: column;width: 400px;margin: 15px;}
 
 .content_card{display: flex;flex-direction: column;align-items: center;background-color: #cdc5a3;border-radius: 0px 0px 15px 15px;height: 280px;}
 
-.img_card{border-radius: 15px 15px 0px 0px;margin: 0 10px;}
+.img_card{border-radius: 15px 15px 0px 0px;}
  
 .button_card{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 5px;transform:scale(1.5);transition:0.2s linear;}
 
@@ -65,11 +65,13 @@ section{display: flex;align-items: center;background-color: #cdc5a3;}
 
 .full_img{display: flex;justify-content: center;}
 
-/*Style Nous contacter*/
+/*Style Nous contacter*(form.php)*/
 
-fieldset{display: flex;flex-direction: column;justify-content: center;}
+.form{display:flex;flex-direction: column; justify-content: center;align-items: center;}
 
-.display_card{margin: 15px;}
+input, textarea{text-align: center;font-size: 1.2rem;}
+
+input:focus, textarea:focus{border: 5px solid red;}
 
 /*Style login*/
 
@@ -105,4 +107,8 @@ tr, td{display: flex;flex-direction: row; justify-content: center; border: 1px s
 
 th, td{width: 570px;height: 35PX;align-items: center;font-weight: bold;font-size: 1.2em;background-color: #cdc5a3;}
 
-.crud:hover{color: red}
+ .delete{font-size: 0.8em;}
+
+nav, .pagination{display: flex;justify-content: center;}
+
+.page{padding-left: 10px;}

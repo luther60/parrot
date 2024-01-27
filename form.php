@@ -13,8 +13,6 @@
   <form>
     <fieldset>
 
-    
-
     <p>Les champs obligatoires sont suivis de <span aria-label="required">*</span>.</p>
 
     <div class="form">
@@ -23,7 +21,7 @@
     </div>
     <div class="form">
       <label for="username">Nom&nbsp;:<span aria-label="required">*</span></label>
-      <input id="username" type="text" name="username" required />
+      <input  id="username" type="text" name="username" required />
     </div>
     <div class="form">
       <label for="username">Prénom&nbsp;:<span aria-label="required">*</span></label>
@@ -36,6 +34,11 @@
     <div class="form">
       <label for="username">Email&nbsp;:<span aria-label="required">*</span></label>
       <input id="username" type="text" name="username" required />
+    </div>
+    <div class="form">
+      <label for="story">Détaillez votre demande ici...</label>
+      <textarea id="story" name="story" rows="10" cols="100"  required>
+      </textarea>
     </div>
     </fieldset>
   </form>

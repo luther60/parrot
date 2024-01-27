@@ -17,10 +17,11 @@
 
 <h1>Nos véhicules d'occasion</h1>
 <main class="main_occasions">
- 
+ <?php foreach($vehicles as $vehicle){ ?>
   <section>   
-    <?php foreach($vehicles as $vehicle){ ?>
+    
       <div class="display_card">  
+        
         <img class="img_card" src="<?=htmlentities($vehicle['Img1']);?>">
         <div class="content_card">
           <h2><?=htmlentities($vehicle['Brand']).' '.htmlentities($vehicle['Model']);?></h2>

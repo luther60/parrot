@@ -11,14 +11,25 @@ if (isset($_GET["page"])) {
   $page = (int) $_GET["page"];
 }else {//Sinon on redirige vers page 1
   $page = 1;
+ 
 }
 
 $vehicles = getVehicles($pdo, LIMIT_PER_PAGE, $page);
-
+$totalVehicle = getTotalArticle($pdo);
+$totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'entier supérieur
 
  ?>
+ <main>
 <h1>Liste des véhicules</h1>
-
+<?php if ($totalPage > 1) { ?><!--On régule la pagination en fonction du nb de pages -->
+<nav>
+  <ul class="pagination"><!--Pagination -->
+    <?php for($i = 1;$i <= $totalPage ; $i++) { ?>
+     <li class="page"><a  href="?page=<?=$i;?>"><?=$i;?></a></li>
+    <?php } ?>
+</ul>
+</nav>
+<?php } ?>
 <table>
   <thead>
     <tr>
@@ -40,10 +51,14 @@ $vehicles = getVehicles($pdo, LIMIT_PER_PAGE, $page);
       <td><?=htmlentities($vehicle['Model']);?></td>
       <td><?=htmlentities($vehicle['Price']);?></td>
       <td><?=htmlentities($vehicle['Registration']);?></td>
-      <td class="crud">MODIFIER</td>
-      <td class="crud">SUPPRIMER</td>
+      <td >MODIFIER</td>
+ <!--Mettre en place une confirmation avant delete final -->     
+      <td ><a class="delete" href="vehicle_delete.php?id=<?=$vehicle['id'];?>">SUPPRIMER</a></td>
     </tr>
-<?php }; ?>    
+<?php }; ?>  
+
+  
+</main>
   </tbody>
 </table>
 
