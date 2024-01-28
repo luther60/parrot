@@ -40,6 +40,8 @@
       <textarea id="story" name="story" rows="10" cols="100"  required>
       </textarea>
     </div>
+
+    <div class="parent"><input class="create" type="submit" value="Envoyer"/></div>
     </fieldset>
   </form>
 

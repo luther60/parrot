@@ -30,6 +30,9 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
 </ul>
 </nav>
 <?php } ?>
+<div class="parent">
+<a class="create" href="vehicle_create.php">Ajouter un nouveau vehicule</a>
+</div>
 <table>
   <thead>
     <tr>
@@ -51,7 +54,7 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
       <td><?=htmlentities($vehicle['Model']);?></td>
       <td><?=htmlentities($vehicle['Price']);?></td>
       <td><?=htmlentities($vehicle['Registration']);?></td>
-      <td >MODIFIER</td>
+      <td ><a class="delete" href="vehicle_update.php?id=<?=$vehicle['id'];?>">MODIFIER</a></td>
  <!--Mettre en place une confirmation avant delete final -->     
       <td ><a class="delete" href="vehicle_delete.php?id=<?=$vehicle['id'];?>">SUPPRIMER</a></td>
     </tr>

@@ -78,3 +78,30 @@ function deleteArticle(PDO $pdo, int $id):bool
         return false;
     }
 }
+
+function getCategories($pdo) {
+    $sql = 'SELECT * FROM categories';
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    
+    return $query->fetchAll();
+}
+
+//Fonction ajout/creation d'un nouveau véhicule
+function createVehicle(PDO $pdo,string $brand,string $model,int $price,string $immat,int $km,string $fuel,string $cv,string $speed,string $option):bool {
+  
+    $query = $pdo->prepare("INSERT INTO vehicle (`Brand`,`Model`,`Price`,`Registration`,`Kilometer`,`Fuel`,`MaxSpeed`,`CV`,`Option`)"
+          ."VALUES(:brand, :model, :price, :immat, :km, :fuel, :cv, :speed, :option)");
+  
+          $query->bindValue(':brand', $brand, $pdo::PARAM_STR);
+          $query->bindValue(':model', $model, $pdo::PARAM_STR);
+          $query->bindValue(':price', $price, $pdo::PARAM_INT);
+          $query->bindValue(':immat', $immat, $pdo::PARAM_STR);
+          $query->bindValue(':km', $km, $pdo::PARAM_INT);
+          $query->bindValue(':fuel', $fuel, $pdo::PARAM_STR);
+          $query->bindValue(':cv', $cv, $pdo::PARAM_STR);
+          $query->bindValue(':speed', $speed, $pdo::PARAM_STR);
+          $query->bindValue(':option', $option, $pdo::PARAM_STR);
+          return $query->execute();
+           
+  }
