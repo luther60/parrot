@@ -65,7 +65,7 @@ $result = $query->fetch(PDO::FETCH_ASSOC);//FETCH CAR ON VA RECUPERER UNE SEULE 
 return $result['total'];//Ici le total fait réference a l'alias ds la requete sql via as
 };
 
-//Fonction delete vehicle
+//Fonction suppression vehicle
 function deleteArticle(PDO $pdo, int $id):bool 
 {
   $query = $pdo->prepare("DELETE FROM vehicle WHERE id = :id");
@@ -79,16 +79,13 @@ function deleteArticle(PDO $pdo, int $id):bool
     }
 }
 
-function getCategories($pdo) {
-    $sql = 'SELECT * FROM categories';
-    $query = $pdo->prepare($sql);
-    $query->execute();
-    
-    return $query->fetchAll();
-}
 
 //Fonction ajout/creation d'un nouveau véhicule
-function createVehicle(PDO $pdo,string $brand,string $model,int $price,string $immat,int $km,string $fuel,string $cv,string $speed,string $option):bool {
+function createVehicle(
+  PDO $pdo,string $brand,string $model,int $price,string $immat,int $km,string $fuel,string $cv,string $speed,
+  string $option
+  ):bool 
+{
   
     $query = $pdo->prepare("INSERT INTO vehicle (`Brand`,`Model`,`Price`,`Registration`,`Kilometer`,`Fuel`,`MaxSpeed`,`CV`,`Option`)"
           ."VALUES(:brand, :model, :price, :immat, :km, :fuel, :cv, :speed, :option)");
@@ -105,3 +102,26 @@ function createVehicle(PDO $pdo,string $brand,string $model,int $price,string $i
           return $query->execute();
            
   }
+
+  function saveVehicle(PDO $pdo,string $brand,$model,$price,$immat,$km,$img1,$img2,$img3,$fuel,$speed,$cv,$supp,$id):bool 
+{
+$query = $pdo->prepare("UPDATE `vehicle` SET `Brand` = :brand,`Model` = :model, `Price` = :price, `Registration` = :immat,
+         `Kilometer` = :km, `Img1` = :img1, `Img2` = :img2,`Img3` = :img3, `Fuel` = :fuel, `MaxSpeed` = :speed, `CV` = :cv,
+          `Option` = :supp WHERE `id` = :id ");
+       
+        
+          $query->bindValue(':id', $id, $pdo::PARAM_INT);
+          $query->bindValue(':brand', $brand, $pdo::PARAM_STR);
+          $query->bindValue(':model', $model, $pdo::PARAM_STR);
+          $query->bindValue(':price',$price, $pdo::PARAM_INT);
+          $query->bindValue(':immat', $immat, $pdo::PARAM_STR);
+          $query->bindValue(':km',$km, $pdo::PARAM_INT);
+          $query->bindValue(':img1', $img1, $pdo::PARAM_STR);
+          $query->bindValue(':img2', $img2, $pdo::PARAM_STR);
+          $query->bindValue(':img3', $img3, $pdo::PARAM_STR);
+          $query->bindValue(':fuel', $fuel, $pdo::PARAM_STR);
+          $query->bindValue(':speed', $speed, $pdo::PARAM_STR);
+          $query->bindValue(':cv', $cv, $pdo::PARAM_STR);
+          $query->bindValue(':supp', $supp, $pdo::PARAM_STR);
+          return $query->execute();  
+};   

@@ -4,170 +4,210 @@ require_once __DIR__."/../lib/session.php";
 require_once __DIR__."/../lib/pdo.php";
 require_once __DIR__."/../lib/config.php";
 
-
-
 $errors = [];
 $messages = [];
-$article = [
-    'title' => '',
-    'content' => '',
-    'category_id' => ''
-];
-
-$categories = getCategories($pdo);
-
+$maxSize = 5000000;
+/*Gérer l'ajout d'une seule image possible et suppression d'eventuelle ancienne image*/
 if (isset($_GET['id'])) {
-    //requête pour récupérer les données de l'article en cas de modification
-    $article = getArticleById($pdo, $_GET['id']);
-    if ($article === false) {
+    //requête pour récupérer les données du véhicule courant en cas de modification
+    $vehicle = getVehicleById($pdo, $_GET['id']);
+    if ($vehicle === false) {
         $errors[] = "L'article n\'existe pas";
     }
     $pageTitle = "Formulaire modification article";
-} else {
-    $pageTitle = "Formulaire ajout article";
+};
+
+//On verifie que le formulaire retourne bien une valeur
+  if (isset($_POST['saveVehicle'])) {
+//recuperer les infos de nos images
+  
+$img1_temp = $_FILES['Img1']['tmp_name'];//emplacement temporaire sur le serveur
+$img1_name = $_FILES['Img1']['name'];//nom du fichier
+$img1_type = $_FILES['Img1']['type'];//Type de fichier
+$img1_size = $_FILES['Img1']['size'];//Taille du fichier
+$img1_error = $_FILES['Img1']['error'];//valeur d'erreur
+
+$img2_temp = $_FILES['Img2']['tmp_name'];
+$img2_name = $_FILES['Img2']['name'];
+$img2_type = $_FILES['Img2']['type'];
+$img2_size = $_FILES['Img2']['size'];
+$img2_error = $_FILES['Img2']['error'];
+
+$img3_temp = $_FILES['Img3']['tmp_name'];
+$img3_name = $_FILES['Img3']['name'];
+$img3_type = $_FILES['Img3']['type'];
+$img3_size = $_FILES['Img3']['size'];
+$img3_error = $_FILES['Img3']['error'];
+
+
+//Si l'image est bien recu
+if (isset($_FILES["Img1"]["tmp_name"]) || ($_FILES["Img2"]["tmp_name"]) || ($_FILES["Img3"]["tmp_name"]))
+{
+   $check = getimagesize($_FILES['Img1']['tmp_name']);// On la controle
+   $check2 = getimagesize($_FILES['Img2']['tmp_name']);
+   $check3 = getimagesize($_FILES['Img3']['tmp_name']);
+   
+  if($img1_size > $maxSize || $img2_size > $maxSize || $img3_size > $maxSize  ){//Controle de la taille
+
+    echo'Fichier trop gros';
+
+  }else {
+
+       if($check != false || $check2 != false|| $check3 != false) {
+
+//Destruction d'éventuelles script
+$file = htmlentities($img1_name, ENT_QUOTES, "UTF-8");
+$file2 = htmlentities($img2_name, ENT_QUOTES, "UTF-8");
+$file3 = htmlentities($img3_name, ENT_QUOTES, "UTF-8");
+
+//Separation du nom et de l'extension qui retourne un array
+$file = explode('.', $file);
+$file2 = explode('.', $file2);
+$file3 = explode('.', $file3);
+   
+//Mise en minuscule
+$file = strtolower(end($file));
+$file2 = strtolower(end($file2));
+$file3 = strtolower(end($file3));
+   
+//Creation id unique
+$file = uniqid().'.'.$file;
+$file2 = uniqid().'.'.$file2;
+$file3 = uniqid().'.'.$file3;
+
+}else {
+  echo 'Fichier non reconnu';
 }
+ //On s'assure qu'il n'y a pas d'erreur
+if($check === false || $check2=== false || $check3 === false) {
 
-if (isset($_POST['saveArticle'])) {
+  //Téléchargement du fichier
+  echo "Echec de transfert";
 
-    //@todo gérer la gestion des erreurs sur les champs (champ vide etc.)
+}else {
+   
+  $destination = __DIR__."/../upload/".$file;
+  $destination2 = __DIR__."/../upload/".$file2;
+  $destination3 = __DIR__."/../upload/".$file3;
+  
+  move_uploaded_file($img1_temp, $destination);
+  move_uploaded_file($img2_temp, $destination2);
+  move_uploaded_file($img3_temp, $destination3);
+ 
+  
+  echo "Téléchargement réussi";
+  echo($file); 
+} 
+ }
+  }else{
+    $error[] = 'Aucun fichier séléctionner';
+  }
+ 
+    $id = $_GET['id'];
+    $brand = $_POST['marque'];
+    $model = $_POST['modele'];
+    $price = $_POST['prix'];
+    $immat = $_POST['immat'];
+    $km = $_POST['km'];
+    $img1 = "upload/".$file;
+    $img2 = "upload/".$file2;
+    $img3 = "upload/".$file3;
+    $fuel = $_POST['fuel'];
+    $speed = $_POST['maxspeed'];
+    $cv = $_POST['cv'];
+    $supp = $_POST['option'];
+    $res = saveVehicle($pdo,$brand,$model,$price,$immat,$km,$img1,$img2,$img3,$fuel,$speed,$cv,$supp,$id);
     
-    $fileName = null;
-    // Si un fichier est envoyé
-    if (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
-        $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
-        if ($checkImage !== false) {
-            $fileName = slugify(basename($_FILES["file"]["name"]));
-            $fileName = uniqid() . '-' . $fileName;
-
-
-
-            /* On déplace le fichier uploadé dans notre dossier upload, dirname(__DIR__) 
-                permet de cibler le dossier parent car on se trouve dans admin
-            */
-            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__)._ARTICLES_IMAGES_FOLDER_ . $fileName)) {
-                if (isset($_POST['image'])) {
-                    // On supprime l'ancienne image si on a posté une nouvelle
-                    unlink(dirname(__DIR__)._ARTICLES_IMAGES_FOLDER_ . $_POST['image']);
-                }
-            } else {
-                $errors[] = 'Le fichier n\'a pas été uploadé';
-            }
-        } else {
-            $errors[] = 'Le fichier doit être une image';
-        }
-    } else {
-        // Si aucun fichier n'a été envoyé
-        if (isset($_GET['id'])) {
-            if (isset($_POST['delete_image'])) {
-                // Si on a coché la case de suppression d'image, on supprime l'image
-                unlink(dirname(__DIR__)._ARTICLES_IMAGES_FOLDER_ . $_POST['image']);
-            } else {
-                $fileName = $_POST['image'];
-            }
-        }
-    }
-    /* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher
-       les informations dans les champs. C'est utile pas exemple si on upload un mauvais
-       fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
-    */
-    $article = [
-        'title' => $_POST['title'],
-        'content' => $_POST['content'],
-        'category_id' => $_POST['category_id'],
-        'image' => $fileName
-    ];
-    // Si il n'y a pas d'erreur on peut faire la sauvegarde
-    if (!$errors) {
-        if (isset($_GET["id"])) {
-            // Avec (int) on s'assure que la valeur stockée sera de type int
-            $id = (int)$_GET["id"];
-        } else {
-            $id = null;
-        }
-        // On passe toutes les données à la fonction saveArticle
-        $res = saveArticle($pdo, $_POST["title"], $_POST["content"], $fileName, (int)$_POST["category_id"], $id);
-
-        if ($res) {
-            $messages[] = "L'article a bien été sauvegardé";
-            //On vide le tableau article pour avoir les champs de formulaire vides
-            if (!isset($_GET["id"])) {
-                $article = [
-                    'title' => '',
-                    'content' => '',
-                    'category_id' => ''
-                ];
-            }
-        } else {
-            $errors[] = "L'article n'a pas été sauvegardé";
-        }
-    }
 }
+ 
+
 
 ?>
-<h1><?= $pageTitle; ?></h1>
+<h1><?= htmlspecialchars($pageTitle); ?></h1>
 
 <?php foreach ($messages as $message) { ?>
     <div class="alert alert-success" role="alert">
-        <?= $message; ?>
+        <?= htmlspecialchars($message); ?>
     </div>
 <?php } ?>
 <?php foreach ($errors as $error) { ?>
     <div class="alert alert-danger" role="alert">
-        <?= $error; ?>
+        <?= htmlspecialchars($error); ?>
     </div>
 <?php } ?>
-<?php if ($article !== false) { ?>
-    <form method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="title" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="title" name="title" value="<?= $article['title']; ?>">
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">Contenu</label>
-            <textarea class="form-control" id="content" name="content" rows="8"><?= $article['content']; ?></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label">Catégorie</label>
-            <select name="category_id" id="category" class="form-select">
-                <?php foreach ($categories as $category) { ?>
-                    <option value="1" <?php if (isset($article['category_id']) && $article['category_id'] == $category['id']) { ?>selected="selected" <?php }; ?>><?= $category['name'] ?></option>
-                <?php } ?>
-            </select>
-        </div>
 
-        <?php if (isset($_GET['id']) && isset($article['image'])) { ?>
-            <p>
-                <img src="<?= _ARTICLES_IMAGES_FOLDER_ . $article['image'] ?>" alt="<?= $article['title'] ?>" width="100">
-                <label for="delete_image">Supprimer l'image</label>
-                <input type="checkbox" name="delete_image" id="delete_image">
-                <input type="hidden" name="image" value="<?= $article['image']; ?>">
 
-            </p>
+<?php if ($vehicle !== false) { ?>
+    <form method="POST" action="vehicle_update.php?id=<?=$_GET['id'];?>" enctype="multipart/form-data">
+    <div class="form">
+      <label for="marque">Marque&nbsp;:<span aria-label="required">*</span></label>
+      <input id="marque" type="text" name="marque" required value="<?= htmlspecialchars($vehicle['Brand']); ?>"/>
+      
+    </div>
+
+    <div class="form">
+      <label for="modele">Modèle&nbsp;:<span aria-label="required">*</span></label>
+      <input id="modele" type="text" name="modele" required value="<?= htmlspecialchars($vehicle['Model']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="prix">Prix&nbsp;:<span aria-label="required">*</span></label>
+      <input id="prix" type="text" name="prix" required value="<?= htmlspecialchars($vehicle['Price']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="immat">Année d'immatriculation&nbsp;:<span aria-label="required">*</span></label>
+      <input id="immat" type="text" name="immat" required value="<?= htmlspecialchars($vehicle['Registration']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="km">Kilométrage&nbsp;:<span aria-label="required">*</span></label>
+      <input id="km" type="text" name="km" required value="<?= htmlspecialchars($vehicle['Kilometer']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="fuel">Motorisation (Essence, Diesel, etc...)&nbsp;:<span aria-label="required">*</span></label>
+      <input id="fuel" type="text" name="fuel" required value="<?= htmlspecialchars($vehicle['Fuel']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="cv">Nombre de CV&nbsp;:<span aria-label="required">*</span></label>
+      <input id="cv" type="text" name="cv" required value="<?= htmlspecialchars($vehicle['CV']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="maxspeed">Vitesse maxi&nbsp;:<span aria-label="required">*</span></label>
+      <input id="maxspeed" type="text" name="maxspeed" required value="<?= htmlspecialchars($vehicle['MaxSpeed']); ?>"/>
+    </div>
+
+    <div class="form">
+      <label for="option">Options...</label>
+      <textarea id="option" name="option" rows="10" cols="100"  required ><?= htmlspecialchars($vehicle['Option']); ?>
+      </textarea>
+    </div>
+
+    <div class="displayform">
+    <img src="/../<?= htmlspecialchars($vehicle['Img1']);?>">
+    <img src="/../<?= htmlspecialchars($vehicle['Img2']);?>">
+    <img src="/../<?= htmlspecialchars($vehicle['Img3']);?>">
+    </div>   
+      
+        
+<!--Champs gestion/upload image -->
+        
+            <div class="upload">
+            <label for="Img1">Choisir une image</label>
+            
+            <input type="file" name="Img1" id="image" value="<?= htmlspecialchars($vehicle['Img1']); ?>">
+            
+            <input type="file" name="Img2" id="image" value="<?= htmlspecialchars($vehicle['Img2']); ?>">
+
+            <input type="file" name="Img3" id="image" value="<?= htmlspecialchars($vehicle['Img3']); ?>">
+            </div>
         <?php } ?>
-        <p>
-            <input type="file" name="file" id="file">
-        </p>
-
-        <input type="submit" name="saveArticle" class="btn btn-primary" value="Enregistrer">
-
+        
+        <input class="submit" type="submit" name="saveVehicle"  value="Modifier">
+        
     </form>
-
-<?php } ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php require_once __DIR__."/../admin/template_admin/footer_admin.php";?>

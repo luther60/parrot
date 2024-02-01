@@ -127,3 +127,14 @@ nav, .pagination{display: flex;justify-content: center;}
       justify-content: center; 
       align-items: center;
    }
+
+.displayform{display: flex;}
+
+.session{background-color: red;}
+
+/*gestion upload*/
+
+.upload{display: flex;flex-direction: column;margin-top: 50px;}
+
+#image{width: 500px;}
+

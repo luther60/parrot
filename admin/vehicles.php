@@ -20,6 +20,7 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
 
  ?>
  <main>
+ <h1 class="session">Session administrateur</h1>
 <h1>Liste des véhicules</h1>
 <?php if ($totalPage > 1) { ?><!--On régule la pagination en fonction du nb de pages -->
 <nav>
@@ -56,7 +57,7 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
       <td><?=htmlentities($vehicle['Registration']);?></td>
       <td ><a class="delete" href="vehicle_update.php?id=<?=$vehicle['id'];?>">MODIFIER</a></td>
  <!--Mettre en place une confirmation avant delete final -->     
-      <td ><a class="delete" href="vehicle_delete.php?id=<?=$vehicle['id'];?>">SUPPRIMER</a></td>
+      <td ><a class="delete" id="erase" href="vehicle_delete.php?id=<?=$vehicle['id'];?>">SUPPRIMER</a></td>
     </tr>
 <?php }; ?>  
 
@@ -64,5 +65,5 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
 </main>
   </tbody>
 </table>
-
+<script src="test.js"></script>
 <?php require_once __DIR__."/../admin/template_admin/footer_admin.php";?>

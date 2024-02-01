@@ -1,7 +1,7 @@
 <?php
 //En principe cette partie est gérée par l'hébergeur (A vérifier)
 session_set_cookie_params([
-    'lifetime' => 1800, //Temps de la session
+    'lifetime' => 3600, //Temps de la session
     'path' => '/',
     'domain' => 'gparrot',
     /*'secure' => true,*/ //Ne fonctionne pas en local

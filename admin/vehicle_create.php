@@ -30,6 +30,7 @@ if(isset($_POST['create_vehicle'])) {
 <?php } ?>
 <h1>Création d'un nouveau véhicule</h1>
 
+
 <form action="" method="post">
 <div class="form">
       <label for="marque">Marque&nbsp;:<span aria-label="required">*</span></label>

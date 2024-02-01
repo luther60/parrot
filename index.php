@@ -15,6 +15,7 @@
     <img class="img_home" src="<?= $mainPage[$key]["image"] ?>" alt="<?= $mainPage[$key]["alt"] ?>">
     <p><?= $mainPage[$key]["textContent"] ?>
     </p>
+    <img src="upload/default_cars.jpg">
   </article>
   </section>
 
