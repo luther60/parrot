@@ -65,5 +65,5 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
 </main>
   </tbody>
 </table>
-<script src="test.js"></script>
+
 <?php require_once __DIR__."/../admin/template_admin/footer_admin.php";?>

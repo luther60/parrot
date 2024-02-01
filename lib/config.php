@@ -103,6 +103,7 @@ function createVehicle(
            
   }
 
+  //Fonction modification d'un véhicule
   function saveVehicle(PDO $pdo,string $brand,$model,$price,$immat,$km,$img1,$img2,$img3,$fuel,$speed,$cv,$supp,$id):bool 
 {
 $query = $pdo->prepare("UPDATE `vehicle` SET `Brand` = :brand,`Model` = :model, `Price` = :price, `Registration` = :immat,
@@ -125,3 +126,54 @@ $query = $pdo->prepare("UPDATE `vehicle` SET `Brand` = :brand,`Model` = :model, 
           $query->bindValue(':supp', $supp, $pdo::PARAM_STR);
           return $query->execute();  
 };   
+
+
+//Fonction création d'un nouveau user
+function create_user(PDO $pdo,string $email,string $hash,string $name,string $last_name,$role):bool {
+  $query = $pdo->prepare("INSERT INTO users (`Email`,`Password`,`FirstName`,`LastaName`,`role`)"
+  ."VALUES (:email, :password, :name, :last_name, :role)");
+
+  $query->bindValue(':email',$email,$pdo::PARAM_STR);
+  $query->bindValue(':password',$hash,$pdo::PARAM_STR);
+  $query->bindValue(':name',$name,$pdo::PARAM_STR);
+  $query->bindValue(':last_name',$last_name,$pdo::PARAM_STR);
+  $query->bindValue(':role',$role,$pdo::PARAM_STR);
+  return $query->execute();
+
+};
+
+//Fonction suppression user
+
+function deleteUser(PDO $pdo, int $id):bool 
+{
+  $query = $pdo->prepare("DELETE FROM users WHERE id = :id");
+  $query->bindValue(':id', $id, $pdo::PARAM_INT);
+  $query->execute();
+
+    if ($query->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//Fonction all users
+
+function getUsers(PDO $pdo):array {
+  $query = $pdo->prepare("SELECT * FROM users");
+  $query->execute();
+  $users = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $users;
+};
+
+//Fonction user by id
+
+function getUsersById(PDO $pdo, int $id):array|bool
+{
+$sql = 'SELECT * FROM users WHERE id = :id';
+$query = $pdo->prepare($sql);
+$query->bindValue(":id", $id, PDO::PARAM_INT);
+$query->execute();
+$user = $query->fetch(PDO::FETCH_ASSOC);
+return $user;
+};
