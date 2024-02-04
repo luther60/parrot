@@ -6,9 +6,11 @@ adminOnly();
 
 
 <main>
-
-  <div class="parent"><a class="create" href="create_user.php">Créer un superviseur</a></div>
-
+  <div class="admin">
+  <div class="button"><a class="create" href="accueil_admin.php">Modifier page d'accueil</a></div>
+  <div class="button"><a class="create" href="create_user.php">Créer un superviseur</a></div>
+  <div class="button"><a class="create" href="users.php">Liste des superviseur</a></div>
+  </div>
   <h1 class="session">Session administrateur</h1>
  
 <p >Bienvenue dans votre session administrateur, d'ici vous pouvez gérer toute la partie backend de votre site telle que :</p>

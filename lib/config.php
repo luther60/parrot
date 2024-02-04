@@ -143,7 +143,6 @@ function create_user(PDO $pdo,string $email,string $hash,string $name,string $la
 };
 
 //Fonction suppression user
-
 function deleteUser(PDO $pdo, int $id):bool 
 {
   $query = $pdo->prepare("DELETE FROM users WHERE id = :id");
@@ -158,7 +157,6 @@ function deleteUser(PDO $pdo, int $id):bool
 }
 
 //Fonction all users
-
 function getUsers(PDO $pdo):array {
   $query = $pdo->prepare("SELECT * FROM users");
   $query->execute();
@@ -167,7 +165,6 @@ function getUsers(PDO $pdo):array {
 };
 
 //Fonction user by id
-
 function getUsersById(PDO $pdo, int $id):array|bool
 {
 $sql = 'SELECT * FROM users WHERE id = :id';
@@ -177,3 +174,33 @@ $query->execute();
 $user = $query->fetch(PDO::FETCH_ASSOC);
 return $user;
 };
+
+//Fonction creation de module accueil
+function createAccueil(PDO $pdo,string $titre, string $img, string $text):bool
+{
+  $query = $pdo->prepare("INSERT INTO `accueil` (`titre`,`img`,`text`) VALUES (:titre,:img,:text)");
+
+  $query->bindValue(':titre', $titre, PDO::PARAM_STR);
+  $query->bindValue(':img', $img, PDO::PARAM_STR);
+  $query->bindValue(':text', $text, PDO::PARAM_STR);
+  return $query->execute();
+}
+
+//Fonction accueil by id
+function accueilById(PDO $pdo, int $id):array|bool
+{
+  $query = $pdo->prepare("SELECT * FROM `accueil` WHERE id = :id");
+  $query->bindValue(':id',$id,PDO::PARAM_INT);
+  $query->execute();
+  $accueil = $query->fetch(PDO::FETCH_ASSOC);
+  return $accueil;
+};
+
+//Fonction full accueil
+function getAccueil(PDO $pdo):array {
+  
+  $query = $pdo->prepare("SELECT * FROM `accueil`");
+  $query->execute();
+  $accueils= $query->fetchAll(PDO::FETCH_ASSOC);
+  return $accueils;
+ }

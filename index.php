@@ -2,20 +2,20 @@
   require_once __DIR__."/lib/session.php";
   require_once __DIR__."/lib/pdo.php";
   require_once(__DIR__."/templates/header.php");
-  require_once(__DIR__."/lib/main_index.php");
-   
+  require_once(__DIR__."/lib/config.php");
+  $accueils = getAccueil($pdo);
+  
 ?>
 
 <!-- Display main page -->
 <main>
-  <?php foreach($mainPage as $key => $mainContent){ ?>
+  <?php foreach($accueils as $accueil){ ?>
   <section>
-  <h1><?= $mainPage[$key]["title"] ?></h1>
+  <h1><?= $accueil["titre"] ?></h1>
   <article class="main_content">
-    <img class="img_home" src="<?= $mainPage[$key]["image"] ?>" alt="<?= $mainPage[$key]["alt"] ?>">
-    <p><?= $mainPage[$key]["textContent"] ?>
+    <img class="img_home" src="<?= $accueil["img"] ?>" alt="<?= $accueil["img"] ?>">
+    <p><?= $accueil["text"] ?>
     </p>
-    <img src="upload/default_cars.jpg">
   </article>
   </section>
 
