@@ -6,8 +6,12 @@ require_once __DIR__."/../lib/config.php";
 
 $errors = [];
 $messages = [];
-$maxSize = 5000000;
+$file = null;
+$file2 = null;
+$file3 = null;
+
 /*Gérer l'ajout d'une seule image possible et suppression d'eventuelle ancienne image*/
+
 if (isset($_GET['id'])) {
     //requête pour récupérer les données du véhicule courant en cas de modification
     $vehicle = getVehicleById($pdo, $_GET['id']);
@@ -17,92 +21,47 @@ if (isset($_GET['id'])) {
     $pageTitle = "Formulaire modification article";
 };
 
+
 //On verifie que le formulaire retourne bien une valeur
   if (isset($_POST['saveVehicle'])) {
-//recuperer les infos de nos images
+
   
-$img1_temp = $_FILES['Img1']['tmp_name'];//emplacement temporaire sur le serveur
-$img1_name = $_FILES['Img1']['name'];//nom du fichier
-$img1_type = $_FILES['Img1']['type'];//Type de fichier
-$img1_size = $_FILES['Img1']['size'];//Taille du fichier
-$img1_error = $_FILES['Img1']['error'];//valeur d'erreur
-
-$img2_temp = $_FILES['Img2']['tmp_name'];
-$img2_name = $_FILES['Img2']['name'];
-$img2_type = $_FILES['Img2']['type'];
-$img2_size = $_FILES['Img2']['size'];
-$img2_error = $_FILES['Img2']['error'];
-
-$img3_temp = $_FILES['Img3']['tmp_name'];
-$img3_name = $_FILES['Img3']['name'];
-$img3_type = $_FILES['Img3']['type'];
-$img3_size = $_FILES['Img3']['size'];
-$img3_error = $_FILES['Img3']['error'];
-
-
-//Si l'image est bien recu
-if (isset($_FILES["Img1"]["tmp_name"]) || ($_FILES["Img2"]["tmp_name"]) || ($_FILES["Img3"]["tmp_name"]))
-{
-   $check = getimagesize($_FILES['Img1']['tmp_name']);// On la controle
-   $check2 = getimagesize($_FILES['Img2']['tmp_name']);
-   $check3 = getimagesize($_FILES['Img3']['tmp_name']);
-   
-  if($img1_size > $maxSize || $img2_size > $maxSize || $img3_size > $maxSize  ){//Controle de la taille
-
-    echo'Fichier trop gros';
-
-  }else {
-
-       if($check != false || $check2 != false|| $check3 != false) {
-
-//Destruction d'éventuelles script
-$file = htmlentities($img1_name, ENT_QUOTES, "UTF-8");
-$file2 = htmlentities($img2_name, ENT_QUOTES, "UTF-8");
-$file3 = htmlentities($img3_name, ENT_QUOTES, "UTF-8");
-
-//Separation du nom et de l'extension qui retourne un array
-$file = explode('.', $file);
-$file2 = explode('.', $file2);
-$file3 = explode('.', $file3);
-   
-//Mise en minuscule
-$file = strtolower(end($file));
-$file2 = strtolower(end($file2));
-$file3 = strtolower(end($file3));
-   
-//Creation id unique
-$file = uniqid().'.'.$file;
-$file2 = uniqid().'.'.$file2;
-$file3 = uniqid().'.'.$file3;
-
-}else {
-  echo 'Fichier non reconnu';
-}
- //On s'assure qu'il n'y a pas d'erreur
-if($check === false || $check2=== false || $check3 === false) {
-
-  //Téléchargement du fichier
-  echo "Echec de transfert";
-
-}else {
-   
-  $destination = __DIR__."/../upload/".$file;
-  $destination2 = __DIR__."/../upload/".$file2;
-  $destination3 = __DIR__."/../upload/".$file3;
+if ($_FILES['Img1']['name'] === '') {
   
-  move_uploaded_file($img1_temp, $destination);
-  move_uploaded_file($img2_temp, $destination2);
-  move_uploaded_file($img3_temp, $destination3);
- 
-  
-  echo "Téléchargement réussi";
-  echo($file); 
-} 
+ }else{
+   $analyse = getimagesize($_FILES['Img1']['tmp_name']);//Controle
+   $file = htmlentities($_FILES['Img1']['name'], ENT_QUOTES, "UTF-8");//XSS
+   $file = explode('.', $file);
+   $file = strtolower(end($file));//Mise en minuscule de l'extension
+   $file = uniqid().'.'.$file;//Attribution d'un nom unique
+   $destination = __DIR__."/../upload/".$file;//Indication de l'emplacement du fichier
+   move_uploaded_file($_FILES['Img1']['tmp_name'], $destination);//Deplacement du fichier temporaire vers emplacement definitif
  }
-  }else{
-    $error[] = 'Aucun fichier séléctionner';
-  }
- 
+
+ if ($_FILES['Img2']['name'] === '') {
+  
+   }else{
+     $analyse2 = getimagesize($_FILES['Img2']['tmp_name']);
+     $file2 = htmlentities($_FILES['Img2']['name'], ENT_QUOTES, "UTF-8");
+     $file2 = explode('.', $file2);
+     $file2 = strtolower(end($file2));
+     $file2 = uniqid().'.'.$file2;
+     $destination2 = __DIR__."/../upload/".$file2;
+     move_uploaded_file($_FILES['Img2']['tmp_name'], $destination2);
+   }
+
+   if ($_FILES['Img3']['name'] === '') {
+    
+     }else{
+         $analyse3 = getimagesize($_FILES['Img3']['tmp_name']);
+         $file3 = htmlentities($_FILES['Img3']['name'], ENT_QUOTES, "UTF-8");
+         $file3 = explode('.', $file3);
+         $file3 = strtolower(end($file3));
+         $file3 = uniqid().'.'.$file3;
+         $destination3 = __DIR__."/../upload/".$file3;
+         move_uploaded_file($_FILES['Img3']['tmp_name'], $destination3);
+          }
+           
     $id = $_GET['id'];
     $brand = $_POST['marque'];
     $model = $_POST['modele'];
@@ -117,8 +76,20 @@ if($check === false || $check2=== false || $check3 === false) {
     $cv = $_POST['cv'];
     $supp = $_POST['option'];
     $res = saveVehicle($pdo,$brand,$model,$price,$immat,$km,$img1,$img2,$img3,$fuel,$speed,$cv,$supp,$id);
+        }
+  
+   
+   
     
-}
+  
+  
+  
+    
+    
+  
+   
+   
+
  
 
 
@@ -142,7 +113,6 @@ if($check === false || $check2=== false || $check3 === false) {
     <div class="form">
       <label for="marque">Marque&nbsp;:<span aria-label="required">*</span></label>
       <input id="marque" type="text" name="marque" required value="<?= htmlspecialchars($vehicle['Brand']); ?>"/>
-      
     </div>
 
     <div class="form">
@@ -187,9 +157,9 @@ if($check === false || $check2=== false || $check3 === false) {
     </div>
 
     <div class="displayform">
-    <img src="/../<?= htmlspecialchars($vehicle['Img1']);?>">
-    <img src="/../<?= htmlspecialchars($vehicle['Img2']);?>">
-    <img src="/../<?= htmlspecialchars($vehicle['Img3']);?>">
+    <img src="/../<?= ($vehicle['Img1']);?>">
+    <img src="/../<?= ($vehicle['Img2']);?>">
+    <img src="/../<?= ($vehicle['Img3']);?>">
     </div>   
       
         
@@ -198,11 +168,11 @@ if($check === false || $check2=== false || $check3 === false) {
             <div class="upload">
             <label for="Img1">Choisir une image</label>
             
-            <input type="file" name="Img1" id="image" value="<?= htmlspecialchars($vehicle['Img1']); ?>">
+            <input type="file" name="Img1" id="image" value="<?= ($vehicle['Img1']); ?>">
             
-            <input type="file" name="Img2" id="image" value="<?= htmlspecialchars($vehicle['Img2']); ?>">
+            <input type="file" name="Img2" id="image" value="<?= ($vehicle['Img2']); ?>">
 
-            <input type="file" name="Img3" id="image" value="<?= htmlspecialchars($vehicle['Img3']); ?>">
+            <input type="file" name="Img3" id="image" value="<?= ($vehicle['Img3']); ?>">
             </div>
         <?php } ?>
         
