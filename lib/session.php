@@ -16,7 +16,10 @@ function adminOnly() {
 if(!isset($_SESSION['user'])) {
     header("location: /../../index.php");//redirection
  };
- if($_SESSION['user']['role'] != 'admin') {
+
+ if($_SESSION['user']['role'] != 'admin' && $_SESSION['user']['role'] != 'super') {
    header("location: admin/index_admin.php");//redirection
- };
-}
+ }
+};
+
+

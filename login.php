@@ -18,6 +18,8 @@
       header("location: /index.php");
     }elseif ($user['role'] === "admin") {
       header("location: /admin/index_admin.php");
+    }elseif ($user['role'] === "super"){
+      header("location: /admin/index_admin.php");
     }
   }else {
     $errors[] = "Email ou mot de passe incorrect";

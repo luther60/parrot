@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <main>
- <section>
+ <section class="vehicles">
 <?php if (!$error) { ?>
  <div class="display_card">
       <div class = "full_img">
@@ -47,6 +47,7 @@ if (isset($_GET['id'])) {
 <?php } ?>    
  </section>
 </main>
+
 <?php
   require_once(__DIR__."/templates/footer.php");
 ?>  

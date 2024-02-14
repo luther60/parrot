@@ -78,21 +78,6 @@ if ($_FILES['Img1']['name'] === '') {
     $res = saveVehicle($pdo,$brand,$model,$price,$immat,$km,$img1,$img2,$img3,$fuel,$speed,$cv,$supp,$id);
         }
   
-   
-   
-    
-  
-  
-  
-    
-    
-  
-   
-   
-
- 
-
-
 ?>
 <h1><?= htmlspecialchars($pageTitle); ?></h1>
 

@@ -26,7 +26,7 @@ if(isset($_POST['create_vehicle'])) {
 
 ?>
 <?php foreach($mess as $mess) { ?>
-<h1 id="alertrue"><?= $mess; ?></h1>
+<h1 id="alertrue"><?=htmlspecialchars($mess);?></h1>
 <?php } ?>
 <h1>Création d'un nouveau véhicule</h1>
 

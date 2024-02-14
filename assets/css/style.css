@@ -26,7 +26,7 @@ a:hover{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 
 
 main{margin: 50px;}
 
-section{display: flex;flex-direction: column;margin: 10px;border-radius: 5px;}
+.main_index{display: flex;flex-direction: column;margin: 10px;border-radius: 5px;}
 
 img{border-radius: 15px 0px 0px 15px;height: 300px;}
 
@@ -51,7 +51,11 @@ h2, p{text-align: center; font-family: 'Montserrat', sans-serif;}
 
 .main_occasions{display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;}
 
-.display_card{display: flex;flex-direction: column;width: 400px;margin: 15px;}
+.vehicles{display: flex;flex-direction: row; flex-wrap: wrap;justify-content: space-around; }
+
+.display_cards{display: flex;flex-direction: column;width: 440px;margin: 15px;}
+
+.display_card{display: flex;flex-direction: column; width: 1265px;margin: 15px;}
 
 .content_card{display: flex;flex-direction: column;align-items: center;background-color: #cdc5a3;border-radius: 0px 0px 15px 15px;height: 280px;}
 
@@ -59,11 +63,13 @@ h2, p{text-align: center; font-family: 'Montserrat', sans-serif;}
  
 .button_card{background-color: #a59a6f;border-radius: 10px;box-shadow: 10px 10px 5px 5px;transform:scale(1.5);transition:0.2s linear;}
 
-section{display: flex;align-items: center;background-color: #cdc5a3;}
-
-.vehicle_features{ align-content: center;}
-
 .full_img{display: flex;justify-content: center;}
+
+.vehicle_features{display: flex;}
+
+.input_range{display: flex; flex-direction: row;justify-content: space-around;}
+
+.range{display: flex; flex-direction: row;}
 
 /*Style Nous contacter*(form.php)*/
 
@@ -72,6 +78,8 @@ section{display: flex;align-items: center;background-color: #cdc5a3;}
 input, textarea{text-align: center;font-size: 1.2rem;margin-bottom: 15px;}
 
 input:focus, textarea:focus{border: 5px solid red;}
+
+
 
 /*Style login*/
 
@@ -134,11 +142,17 @@ nav, .pagination{display: flex;justify-content: center;}
 
 .admin{display: flex;flex-direction: row;justify-content: space-around;}
 
+.info{display: flex;justify-content: center;}
+
+.select{display: flex;justify-content: space-around;}
+
 /*gestion upload*/
 
 .upload{display: flex;flex-direction: column;margin-top: 50px;}
 
 #image{width: 500px;}
+
+
 
 
 

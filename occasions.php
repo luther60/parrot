@@ -4,37 +4,41 @@
   require_once __DIR__."/lib/config.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-
-<?php $vehicles = getVehicles($pdo);?>
+<?php $vehicles = getVehicles($pdo);
+//Encodage de la table vehicles en json
+$vehiclesFilter = json_encode($vehicles);
+$filter = file_put_contents('admin/JSON/filter.json', $vehiclesFilter);
+?>
 
 <h1>Nos véhicules d'occasion</h1>
+
+<p>Filtrer par:</p>
+<div class="input_range">
+  <div class="range">
+    <label for="volume">Kilometrage</label>
+    <input type="range" id="max_km" name="max_km" min="0" max="300000" step="5000"/>
+  </div>
+
+  <div class="range">
+    <label for="volume">Prix</label>
+    <input type="range" id="max_price" name="max_price" min="2000" max="150000" step="2000"/>
+  </div>
+
+  <div class="range">
+    <label for="volume">Années</label>
+    <input type="range" id="max_années" name="max_années" min="1" max="15" step="1"/>
+  </div> 
+</div>
+
 <main class="main_occasions">
- <?php foreach($vehicles as $vehicle){ ?>
-  <section>   
-    
-      <div class="display_card">  
-        
-        <img class="img_card" src="<?=htmlentities($vehicle['Img1']);?>">
-        <div class="content_card">
-          <h2><?=htmlentities($vehicle['Brand']).' '.htmlentities($vehicle['Model']);?></h2>
-          <p><?=htmlentities($vehicle['Registration']).'|'.htmlentities($vehicle['Kilometer']).'Km'.'|'.htmlentities($vehicle['Fuel']);?></p>
-          <p><?=htmlentities($vehicle['Price']).'€ '?></p>
-          <a  href="occasion.php?id=<?=$vehicle["id"]?>">Détails</a>
-        </div>
-      </div> 
+ 
+  <section class="vehicles">     
+ 
   </section>
-  <?php } ?>
+ 
 </main>
 
-
+<script src="test.js" type="module"></script>
 <?php
   require_once(__DIR__."/templates/footer.php");
 ?>

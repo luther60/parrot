@@ -38,7 +38,7 @@ if(isset($_POST['create_user'])){
   <h1>Création d'un nouveau superviseur</h1>
 
   <?php foreach($mess as $mess) { ?>
-  <h1 id="alertrue"><?= $mess; ?></h1>
+  <h1 id="alertrue"><?=htmlspecialchars($mess);?></h1>
   <?php } ?>
 
   <form action="create_user.php" method="post">

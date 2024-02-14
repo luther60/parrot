@@ -10,7 +10,7 @@
 <!-- Display main page -->
 <main>
   <?php foreach($accueils as $accueil){ ?>
-  <section>
+  <section class="main_index">
   <h1><?= $accueil["titre"] ?></h1>
   <article class="main_content">
     <img class="img_home" src="<?= $accueil["img"] ?>" alt="<?= $accueil["img"] ?>">
