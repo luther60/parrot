@@ -7,8 +7,6 @@
   //Load composer autoloader
   require 'vendor/autoload.php';
   
-  
-  
   $errors = [];
   $messages = [];
   if(empty($_POST['send_message'])) {
@@ -79,10 +77,6 @@
     }
  }
     
-    
-     
- 
- 
 function sendMail($requet,$name,$username,$phone,$email,$story) {
   //Create instance (true => enables exceptions)
   $mail = new PHPMailer(true);
@@ -94,8 +88,8 @@ function sendMail($requet,$name,$username,$phone,$email,$story) {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
-    $mail->Username = ;
-    $mail->Password = ;
+    $mail->Username = 'test@exemple.com';
+    $mail->Password = 'a renseigner!!';
     $mail->Port = 587;
 
     //Recipients
@@ -114,13 +108,7 @@ function sendMail($requet,$name,$username,$phone,$email,$story) {
     echo $e->getMessage();
   }
 }
-  
-
 ?>
-
-
- 
-
 
 <body>
 
@@ -140,11 +128,11 @@ function sendMail($requet,$name,$username,$phone,$email,$story) {
 
     <div class="form">
       <label for="requet">Votre demande&nbsp;:<span aria-label="required">*</span></label>
-      <input id="username" type="text" name="requet"  />
+      <input id="requet" type="text" name="requet"  />
     </div>
     <div class="form">
       <label for="username">Nom&nbsp;:<span aria-label="required">*</span></label>
-      <input  id="username" type="text" name="name"  />
+      <input  id="name" type="text" name="name"  />
     </div>
     <div class="form">
       <label for="username">Prénom&nbsp;:<span aria-label="required">*</span></label>
@@ -152,11 +140,11 @@ function sendMail($requet,$name,$username,$phone,$email,$story) {
     </div>
     <div class="form">
       <label for="username">Téléphone&nbsp;:<span aria-label="required">*</span></label>
-      <input id="username" type="text" name="phone"  />
+      <input id="phone" type="text" name="phone"  />
     </div>
     <div class="form">
       <label for="username">Email&nbsp;:<span aria-label="required">*</span></label>
-      <input id="username" type="text" name="mail"  />
+      <input id="mail" type="text" name="mail"  />
     </div>
     <div class="form">
       <label for="story">Détaillez votre demande ici...</label>

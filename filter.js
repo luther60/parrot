@@ -1,5 +1,3 @@
-
-
 //Récuperation de notre Json
 const vehicles = await fetch("admin/JSON/filter.json", {
   method: 'GET',
@@ -8,9 +6,6 @@ const vehicles = await fetch("admin/JSON/filter.json", {
     "accept": "application/json"
   }
 }).then(pieces => pieces.json());
-
-
-
 
  function GetFilter(vehicles) {
   const displayVehicles = document.querySelector('.vehicles')//Section
@@ -43,7 +38,6 @@ const vehicles = await fetch("admin/JSON/filter.json", {
   detail.innerText = 'Détails'
   detail.href = "occasion.php?id="+vehicles[i].id
   
-
   //Déclaration des noeuds enfant
   displayVehicles.appendChild(displayCards)
   displayCards.appendChild(imgCard)
@@ -52,15 +46,10 @@ const vehicles = await fetch("admin/JSON/filter.json", {
   contentCard.appendChild(info)
   contentCard.appendChild(price)
   contentCard.appendChild(detail)
- 
 }
  }
 
-
 GetFilter(vehicles)
-
- 
-  
 
 //Trie le moins cher
 const maxPrice = document.querySelector('#max_price')
@@ -77,7 +66,6 @@ maxPrice.addEventListener('input', function() {
   GetFilter(filterPrice)
   console.log(filterPrice)
 })
-
 //Trie le kilometrage max
 const maxKm = document.querySelector('#max_km')
 maxKm.addEventListener('input', function() {
@@ -91,7 +79,6 @@ maxKm.addEventListener('input', function() {
   GetFilter(filterKm)
   console.log(filterKm)
 })
-
 //Trie le nombre max années
 const maxYears = document.querySelector('#max_années')
 maxYears.addEventListener('input', function() {

@@ -38,7 +38,7 @@ $filter = file_put_contents('admin/JSON/filter.json', $vehiclesFilter);
  
 </main>
 
-<script src="test.js" type="module"></script>
+<script src="filter.js" type="module"></script>
 <?php
   require_once(__DIR__."/templates/footer.php");
 ?>

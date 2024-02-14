@@ -4,26 +4,24 @@ require_once __DIR__."/../lib/session.php";
 require_once __DIR__."/../lib/pdo.php";
 require_once __DIR__."/../lib/config.php";
 
-
 /*Si il y a une page existante*/
 if (isset($_GET["page"])) {
   /*Alors on recupere la page via get*/ 
   $page = (int) $_GET["page"];
 }else {//Sinon on redirige vers page 1
   $page = 1;
- 
 }
 
 $vehicles = getVehicles($pdo, LIMIT_PER_PAGE, $page);
 $totalVehicle = getTotalArticle($pdo);
 $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'entier supérieur
-
  ?>
+
  <main>
  <h1 class="session">Session administrateur</h1>
 <h1>Liste des véhicules</h1>
 <?php if ($totalPage > 1) { ?><!--On régule la pagination en fonction du nb de pages -->
-<nav>
+<nav class="pagination">
   <ul class="pagination"><!--Pagination -->
     <?php for($i = 1;$i <= $totalPage ; $i++) { ?>
      <li class="page"><a  href="?page=<?=$i;?>"><?=$i;?></a></li>
@@ -60,8 +58,6 @@ $totalPage = ceil($totalVehicle / LIMIT_PER_PAGE);//Ceil permet d'arrondir à l'
       <td ><a class="delete" id="erase" href="vehicle_delete.php?id=<?=$vehicle['id'];?>">SUPPRIMER</a></td>
     </tr>
 <?php }; ?>  
-
-  
 </main>
   </tbody>
 </table>
