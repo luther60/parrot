@@ -10,6 +10,8 @@
 
   <a class="button" href="form.php">Contactez-nous</a>
 
+  <a class="button" href="form_avis.php">Déposer un avis</a>
+
   <article class="footer_content">
     <h2>Horaires d'ouverture</h2>
     <pre>

@@ -11,7 +11,7 @@ Ex: Page 3
 30 = (3 - 1) * 10
 */
 /*Fonction qui recupere un article via son id => on passe en paramètre le PDO et l'id */
-function getVehicleById(PDO $pdo, int $id):array|bool
+function getVehicleById(PDO $pdo, int $id):array
 {
 /*Requete récuperant l'id via une variable intermédiaire transmise ds le bindvalue*/  
 $sql = 'SELECT * FROM vehicle WHERE id = :id';
@@ -165,7 +165,7 @@ function getUsers(PDO $pdo):array {
 };
 
 //Fonction user by id
-function getUsersById(PDO $pdo, int $id):array|bool
+function getUsersById(PDO $pdo, int $id):array
 {
 $sql = 'SELECT * FROM users WHERE id = :id';
 $query = $pdo->prepare($sql);
@@ -187,7 +187,7 @@ function createAccueil(PDO $pdo,string $titre, string $img, string $text):bool
 }
 
 //Fonction accueil by id
-function accueilById(PDO $pdo, int $id):array|bool
+function accueilById(PDO $pdo, int $id):array
 {
   $query = $pdo->prepare("SELECT * FROM `accueil` WHERE id = :id");
   $query->bindValue(':id',$id,PDO::PARAM_INT);
@@ -204,3 +204,18 @@ function getAccueil(PDO $pdo):array {
   $accueils= $query->fetchAll(PDO::FETCH_ASSOC);
   return $accueils;
  }
+
+ //Fonction création d'un nouvel avis
+function create_post(PDO $pdo,string $name,string $username,string $phone,string $mail,string $avis,string $note):bool {
+  $query = $pdo->prepare("INSERT INTO postusers (`name`,`username`,`phone`,`mail`,`avis`,`note`)"
+  ."VALUES (:name, :username, :phone, :mail, :avis, :note)");
+
+  $query->bindValue(':name',$name,$pdo::PARAM_STR);
+  $query->bindValue(':username',$username,$pdo::PARAM_STR);
+  $query->bindValue(':phone',$phone,$pdo::PARAM_STR);
+  $query->bindValue(':mail',$mail,$pdo::PARAM_STR);
+  $query->bindValue(':avis',$avis,$pdo::PARAM_STR);
+  $query->bindValue(':note',$note,$pdo::PARAM_STR);
+  return $query->execute();
+
+};

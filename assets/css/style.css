@@ -168,7 +168,7 @@ img{border-radius: 15px 0px 0px 15px;height: 150px;width: 279px;}
 .button{background-color: #a59a6f; border-radius: 10px; box-shadow: 5px 5px;
    font-family: 'Montserrat', sans-serif; font-size: 1.5em;margin: 15px;}
 
-footer{display: flex;flex-wrap: wrap; justify-content: space-around; align-items: center;background-color: #cdc5a3;height: 340px;}
+footer{display: flex;flex-wrap: wrap; justify-content: space-around; align-items: center;background-color: #cdc5a3;height: 410px;}
 
 
 }
