@@ -10,19 +10,16 @@ $messages = [];
 
 //On verifie si il a une requete id
 if(isset($_GET['id'])) {
-  //On la recupere
-  $vehicle = getVehicleById($pdo, (int)$_GET['id']);
-}
-
-if ($vehicle) {
-  if (deleteArticle($pdo, $_GET["id"])) {
-      $messages[] = "L'article a bien été supprimer";
-  } else {
-      $errors[] = "Une erreur s'est produite lors de la suppression";
+  $postByid = postByid($pdo, $_GET['id']);
+  
+  $name = $postByid['name'];
+  $username = $postByid['username'];
+  $phone = $postByid['phone'];
+  $email = $postByid['mail'];
+  $avis = $postByid['avis'];
+  $note = $postByid['note'];
+  create_post_validate($pdo,$name,$username,$phone,$email,$avis,$note);
   }
-} else {
-  $errors[] = "Le véhicule n'existe pas";
-}
 ?>
 
 <div>

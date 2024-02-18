@@ -1,4 +1,6 @@
 <?php
+
+//Fichier de test
  $default =  "upload/default_cars.jpg";
 
 ?>

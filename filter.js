@@ -11,7 +11,6 @@ const vehicles = await fetch("admin/JSON/filter.json", {
   const displayVehicles = document.querySelector('.vehicles')//Section
   //Boucle permettant de récuperer chaque éléments via son index
   for(let i = 0; i < vehicles.length; i++) {
-  //console.log(vehicles[i].id)
   //Création div globale
   const displayCards = document.createElement('div')
   displayCards.classList.add('display_cards')

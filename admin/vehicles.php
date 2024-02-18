@@ -3,7 +3,7 @@ require_once __DIR__."/../admin/template_admin/header_admin.php";
 require_once __DIR__."/../lib/session.php";
 require_once __DIR__."/../lib/pdo.php";
 require_once __DIR__."/../lib/config.php";
-
+adminOnly();
 /*Si il y a une page existante*/
 if (isset($_GET["page"])) {
   /*Alors on recupere la page via get*/ 

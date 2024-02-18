@@ -30,6 +30,14 @@ h1{text-align: center;font-size: 2.5em;font-family: 'Montserrat', sans-serif;}
 
 p{text-align: center; font-family: 'Montserrat', sans-serif;margin: 20px;font-size:2em;}
 
+.validateAvis{display: flex;flex-wrap: wrap;justify-content: center;}
+
+.container{background-color: #cdc5a3;border-radius: 5px;margin: 8px;width: 500px;padding-bottom: 20px;}
+
+.star{color:goldenrod;height: 50px;margin-left: 50px;}
+
+.post_main{display: flex;flex-direction: row;flex-wrap: wrap;}
+
 /*Style footer*/
 
 footer{display: flex;flex-wrap: wrap; justify-content: space-around; align-items: center;background-color: #cdc5a3;height: 350px;}
@@ -45,7 +53,11 @@ h2, p{text-align: center; font-family: 'Montserrat', sans-serif;}
 
 .main_occasions{display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;}
 
+.main_occasions_admin{display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;}
+
 .vehicles{display: flex;flex-direction: row; flex-wrap: wrap;justify-content: space-around; }
+
+.vehicles_admin{display: flex;flex-direction: row; flex-wrap: wrap;justify-content: space-around;width: 500px; }
 
 .display_cards{display: flex;flex-direction: column;width: 440px;margin: 15px;}
 
@@ -144,6 +156,19 @@ th, td{width: 570px;height: 35PX;align-items: center;font-weight: bold;font-size
 
 #image{width: 500px;}
 
+/*Gestion avis admin */
+
+.post_main{display: flex;justify-content: space-around;}
+
+.post{background-color:#a59a6f ;width: 1000px;border-radius: 5px;border: solid black 0.2rem;width: 500px;padding: 20px;}
+
+.inputPost{font-family: 'Montserrat', sans-serif;font-size: 1.5em;background-color: #cdc5a3;border-radius: 10px;margin: 10px;padding: 2px;}
+
+.inputPost:hover{background-color: #a59a6f;}
+
+.homePost{display: flex;justify-content: center;font-family: 'Montserrat', sans-serif;font-size: 1.5em;background-color: #cdc5a3;
+   border-radius: 10px;margin: 10px;}
+
 /*For mobile*/
 @media(max-width:460px) {
  
@@ -170,6 +195,13 @@ img{border-radius: 15px 0px 0px 15px;height: 150px;width: 279px;}
 
 footer{display: flex;flex-wrap: wrap; justify-content: space-around; align-items: center;background-color: #cdc5a3;height: 410px;}
 
+.validateAvis{width: 250px;}
+
+.img_card{margin-left: 80px;}
+
+.input_range{flex-direction: column;width: 250px;}
+
+.range{flex-direction: column;}
 
 }
 
@@ -191,6 +223,10 @@ footer{display: flex;flex-wrap: wrap; justify-content: space-around; align-items
  .button{background-color: #a59a6f; border-radius: 10px; box-shadow: 5px 5px;
    font-family: 'Montserrat', sans-serif; font-size: 1.5em;margin: 25px;}
 
+.input_range{flex-direction: column;width: 250px;}
+
+.range{flex-direction: column;}
+
 }
 
 /*For destokp */
@@ -205,7 +241,7 @@ footer{display: flex;flex-wrap: wrap; justify-content: space-around; align-items
    .button{background-color: #a59a6f; border-radius: 10px; box-shadow: 5px 5px;
       font-family: 'Montserrat', sans-serif; font-size: 1.5em;margin: 30px;}
   
-   .main_content{flex-wrap: wrap; background-color: #cdc5a3;border-radius: 15px;width: 100%;margin-left: -8px;}
+   .main_content{ background-color: #cdc5a3;border-radius: 15px;width: 100%;margin-left: -8px;}
 
 }
 

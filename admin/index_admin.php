@@ -38,9 +38,7 @@ adminOnly();
   
     <h1><pre>La consultation et publication des avis postés via :</pre><span>Avis publiés</span></h1>
 
-    <h1><pre>La consultation des messages reçu via:</pre><span>Messages</span></h1>
-
-    <h1><pre>La modification de vos horaires d'ouverture via :</pre><span>??????</span></h1>
+    <h1><pre>La modification de vos horaires d'ouverture via :</pre><span>Prochainement</span></h1>
 
 </main>
 

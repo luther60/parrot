@@ -49,8 +49,8 @@ require_once __DIR__."/lib/config.php";
     if (empty($_POST['story'])){
       $errors[] = 'La rédaction d\'un avis est obligatoire !';
     }else {
-      $avis = htmlspecialchars($_POST['story'], ENT_QUOTES, 'UTF-8');
-      if(!preg_match("/^[a-zA-Zçéèà0-9 ,.'!?;-]+$/",$avis)) {
+      $avis = htmlspecialchars($_POST['story'], ENT_COMPAT, 'UTF-8');
+      if(!preg_match("/^[a-zA-Z-'é(-èçà),;.:!?% ]*$/",$avis)) {
         $errors[] = 'Le texte ne peut contenir uniquement des lettres,tirets,apostrophes et espaces';
       }
     }

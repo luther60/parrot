@@ -3,6 +3,7 @@ require_once __DIR__."/../admin/template_admin/header_admin.php";
 require_once __DIR__."/../lib/session.php";
 require_once __DIR__."/../lib/pdo.php";
 require_once __DIR__."/../lib/config.php";
+adminOnly();
 $users = getUsers($pdo);
 ?>
 <main>

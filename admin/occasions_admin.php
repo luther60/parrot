@@ -5,21 +5,13 @@
  require_once __DIR__."/../lib/config.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
 
 <?php $vehicles = getVehicles($pdo);?>
 <h1 class="session">Session administrateur</h1>
 <h1>Nos véhicules d'occasion</h1>
-<main class="main_occasions">
+<main class="main_occasions_admin">
  <?php foreach($vehicles as $vehicle){ ?>
-  <section>   
+  <section class="vehicles_admin">   
     
       <div class="display_card">  
       
@@ -35,10 +27,6 @@
   <?php } ?>
 </main>
 
-
-
 <?php require_once __DIR__."/../admin/template_admin/footer_admin.php";?>
 
 
-</body>
-</html>

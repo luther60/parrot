@@ -15,8 +15,7 @@
   <ul class="navbar">
     <li><a href="index_admin.php">Accueil</a></li>
     <li><a href="vehicles.php">Vehicules</a></li>
-    <li><a href="news.asp">Avis publiés</a></li>
-    <li><a href="form.php">Messages</a></li>
+    <li><a href="/../admin/post_clients.php">Avis publiés</a></li>
     <li><a href="/../admin/occasions_admin.php">Nos occasions</a></li>
     
     <!--Deconnexion -->

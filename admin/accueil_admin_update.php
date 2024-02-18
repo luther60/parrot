@@ -7,7 +7,7 @@
  $errors = [];
  $messages = [];
   if (isset($_GET['id'])) {
-    //requête pour récupérer les données du véhicule courant en cas de modification
+    //requête pour récupérer les données de l'article courant en cas de modification
     $accueil = accueilById($pdo, $_GET['id']);
     if ($accueil === false) {
         $errors[] = "L'article n\'existe pas";

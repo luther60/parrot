@@ -219,3 +219,58 @@ function create_post(PDO $pdo,string $name,string $username,string $phone,string
   return $query->execute();
 
 };
+
+//Récuperation de tous les avis
+function getPost(PDO $pdo):array {
+  $query = $pdo->prepare("SELECT * FROM `postusers`");
+  $query->execute();
+  $postAll = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $postAll;
+}
+
+//Suppression des avis
+function deletePost(PDO $pdo, int $id) 
+{
+  $query = $pdo->prepare("DELETE FROM postusers WHERE id = :id");
+  $query->bindValue(':id', $id, $pdo::PARAM_INT);
+  $query->execute();
+
+  if ($query->rowCount() > 0) {
+    return true;
+} else {
+    return false;
+}
+}
+
+//Fonction accueil by id
+function postByid(PDO $pdo, int $id):array
+{
+  $query = $pdo->prepare("SELECT * FROM `postusers` WHERE id = :id");
+  $query->bindValue(':id',$id,PDO::PARAM_INT);
+  $query->execute();
+  $postByid = $query->fetch(PDO::FETCH_ASSOC);
+  return $postByid;
+};
+
+//Fonction création d'un nouvel avis validé
+function create_post_validate(PDO $pdo,string $name,string $username,string $phone,string $email,string $avis,string $note):bool {
+  $query = $pdo->prepare("INSERT INTO postusersvalidate (`name`,`username`,`phone`,`mail`,`avis`,`note`)"
+  ."VALUES (:name, :username, :phone, :mail, :avis, :note)");
+
+  $query->bindValue(':name',$name,$pdo::PARAM_STR);
+  $query->bindValue(':username',$username,$pdo::PARAM_STR);
+  $query->bindValue(':phone',$phone,$pdo::PARAM_STR);
+  $query->bindValue(':mail',$email,$pdo::PARAM_STR);
+  $query->bindValue(':avis',$avis,$pdo::PARAM_STR);
+  $query->bindValue(':note',$note,$pdo::PARAM_STR);
+  return $query->execute();
+
+};
+
+//Récuperation de tous les avis validé
+function getPostvalidate(PDO $pdo):array {
+  $query = $pdo->prepare("SELECT * FROM `postusersvalidate`");
+  $query->execute();
+  $postAll = $query->fetchAll(PDO::FETCH_ASSOC);
+  return $postAll;
+}
