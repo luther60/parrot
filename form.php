@@ -88,14 +88,14 @@ function sendMail($requet,$name,$username,$phone,$email,$story) {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
-    $mail->Username = 'gregorydge057@gmail.com';
-    $mail->Password = 'lawllnyhdawgfoam';
+    $mail->Username = '';
+    $mail->Password = '';
     $mail->Port = 587;
 
     //Recipients
     $mail->setFrom($email,'gparrot');//Adresse expediteur
-    $mail->addAddress('gregdev60@gmail.com', 'gregdev');//Adresse destinataire
-    $mail->addReplyTo('gregorydge057@gmail.com');//Adresse de réponse du destinataire
+    $mail->addAddress('', 'gregdev');//Adresse destinataire
+    $mail->addReplyTo('');//Adresse de réponse du destinataire
 
     //Contents
     $mail->isHTML(true);
