@@ -10,7 +10,6 @@ $dbname = $_ENV["DB_NAME"];
 $dbuser = $_ENV["DB_USER"];
 $dbpassword = $_ENV["DB_PASSWORD"];
 
-
 try {
     $pdo=new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpassword,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
 }

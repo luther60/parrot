@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."/../admin/template_admin/header_admin.php";
+require_once __DIR__."/../super/header_super.php";
 require_once __DIR__."/../lib/session.php";
 require_once __DIR__."/../lib/pdo.php";
 require_once __DIR__."/../lib/config.php";
@@ -20,9 +20,12 @@ if (isset($_GET['id'])) {
     }
     $pageTitle = "Formulaire modification article";
 };
+
+
 //On verifie que le formulaire retourne bien une valeur
   if (isset($_POST['saveVehicle'])) {
 
+  
 if ($_FILES['Img1']['name'] === '') {
   
  }else{
@@ -89,6 +92,7 @@ if ($_FILES['Img1']['name'] === '') {
     </div>
 <?php } ?>
 
+
 <?php if ($vehicle !== false) { ?>
     <form method="POST" action="vehicle_update.php?id=<?=$_GET['id'];?>" enctype="multipart/form-data">
     <div class="form">
@@ -142,7 +146,8 @@ if ($_FILES['Img1']['name'] === '') {
     <img src="/../<?= ($vehicle['Img2']);?>">
     <img src="/../<?= ($vehicle['Img3']);?>">
     </div>   
-          
+      
+        
 <!--Champs gestion/upload image -->
         
             <div class="upload">

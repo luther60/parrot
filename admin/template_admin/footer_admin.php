@@ -8,7 +8,7 @@
     </pre>
   </article>
 
-  <a class="button" href="form.php">Contactez-nous</a>
+  
 
   <article class="footer_content">
     <h2>Horaires d'ouverture</h2>

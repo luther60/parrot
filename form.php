@@ -88,8 +88,8 @@ function sendMail($requet,$name,$username,$phone,$email,$story) {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
-    $mail->Username = 'test@exemple.com';
-    $mail->Password = 'a renseigner!!';
+    $mail->Username = 'gregorydge057@gmail.com';
+    $mail->Password = 'lawllnyhdawgfoam';
     $mail->Port = 587;
 
     //Recipients

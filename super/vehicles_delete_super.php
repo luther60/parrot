@@ -1,23 +1,28 @@
 <?php
-require_once __DIR__."/../admin/template_admin/header_admin.php";
+require_once __DIR__."/../super/header_super.php";
 require_once __DIR__."/../lib/session.php";
 require_once __DIR__."/../lib/config.php";
 require_once __DIR__."/../lib/pdo.php";
-adminOnly();
+
 $vehicle = false;
 $errors = [];
 $messages = [];
+
 //On verifie si il a une requete id
 if(isset($_GET['id'])) {
-  $postByid = postByid($pdo, $_GET['id']);
-  $name = $postByid['name'];
-  $username = $postByid['username'];
-  $phone = $postByid['phone'];
-  $email = $postByid['mail'];
-  $avis = $postByid['avis'];
-  $note = $postByid['note'];
-  create_post_validate($pdo,$name,$username,$phone,$email,$avis,$note);
+  //On la recupere
+  $vehicle = getVehicleById($pdo, (int)$_GET['id']);
+}
+
+if ($vehicle) {
+  if (deleteArticle($pdo, $_GET["id"])) {
+      $messages[] = "L'article a bien été supprimer";
+  } else {
+      $errors[] = "Une erreur s'est produite lors de la suppression";
   }
+} else {
+  $errors[] = "Le véhicule n'existe pas";
+}
 ?>
 
 <div>

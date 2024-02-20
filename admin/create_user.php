@@ -6,6 +6,8 @@ require_once __DIR__."/../lib/config.php";
 adminOnly();
 $mess = [];
 
+
+
 if(isset($_POST['create_user'])){
   $email = $_POST['email'];
   $password = $_POST['password'];

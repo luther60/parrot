@@ -11,15 +11,11 @@ session_set_cookie_params([
 session_start();
 
 function adminOnly() {
-    /*Si pas de session existante ou pas le bon role (regenerate_id evite de réutiliser la page admin en cours de session sur autre
- navigateur que l'actuel, il est possible de limiter le temps de session via le cookie)*/
+    //Si pas de session existante ou pas le bon role (regenerate_id evite de réutiliser la page admin en cours de session sur autre
+// navigateur que l'actuel, il est possible de limiter le temps de session via le cookie)
 if(!isset($_SESSION['user'])) {
     header("location: /../../index.php");//redirection
  };
-
- if($_SESSION['user']['role'] != 'admin' && $_SESSION['user']['role'] != 'super') {
-   header("location: admin/index_admin.php");//redirection
- }
-};
+}
 
 
